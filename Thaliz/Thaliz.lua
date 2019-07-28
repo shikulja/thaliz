@@ -1,4 +1,4 @@
-﻿--[[
+--[[
 Author:			Mimma
 Create Date:	2015-05-10 17:50:57
 
@@ -11,7 +11,10 @@ https://github.com/Sentilix/thaliz
 Please see the ReadMe.txt for addon details.
 ]]
 
-
+local L                 = AceLibrary("AceLocale-2.2"):new("Thaliz")
+local BS                = AceLibrary("Babble-Spell-2.2")
+local BR                = AceLibrary("Babble-Race-2.2")
+local BC                = AceLibrary("Babble-Class-2.2")
 local PARTY_CHANNEL								= "PARTY"
 local RAID_CHANNEL								= "RAID"
 local YELL_CHANNEL								= "YELL"
@@ -28,7 +31,7 @@ local THALIZ_PREFIX								= "Thalizv1"
 local CTRA_PREFIX									= "CTRA"
 local THALIZ_MAX_MESSAGES					= 200
 local THALIZ_MAX_VISIBLE_MESSAGES = 20
-local THALIZ_EMPTY_MESSAGE				= "(Empty)"
+local THALIZ_EMPTY_MESSAGE			= "(Empty)"
 
 local THALIZ_CURRENT_VERSION			= 0
 local THALIZ_UPDATE_MESSAGE_SHOWN = false
@@ -41,15 +44,15 @@ local EMOTE_GROUP_RACE						= "Race";
 
 --	List of valid class names with priority and resurrection spell name (if any)
 local classInfo = {
-	{ "Druid",   40, "Rebirth",						"FF7D0A" },
-	{ "Hunter",  30, nil,									"ABD473" },
-	{ "Mage",    40, nil,									"69CCF0" },
-	{ "Paladin", 50, "Redemption",				"F58CBA" },
-	{ "Priest",  50, "Resurrection",			"FFFFFF" },
-	{ "Rogue",   10, nil,									"FFF569" },
-	{ "Shaman",  50, "Ancestral Spirit",	"F58CBA" },
-	{ "Warlock", 30, nil,									"9482C9" },
-	{ "Warrior", 20, nil,									"C79C6E" }
+	{ BC["Druid"],   40, BS["Rebirth"],						"FF7D0A" },
+	{ BC["Hunter"],  30, nil,									"ABD473" },
+	{ BC["Mage"],    40, nil,									"69CCF0" },
+	{ BC["Paladin"], 50, BS["Redemption"],				"F58CBA" },
+	{ BC["Priest"],  50, BS["Resurrection"],			"FFFFFF" },
+	{ BC["Rogue"],   10, nil,									"FFF569" },
+	{ BC["Shaman"],  50, BS["Ancestral Spirit"],	"F58CBA" },
+	{ BC["Warlock"], 30, nil,									"9482C9" },
+	{ BC["Warrior"], 20, nil,									"C79C6E" }
 }
 
 
@@ -70,7 +73,7 @@ local Thaliz_Configuration_Default_Level							= "Character";	-- Can be "Charact
 local Thaliz_Target_Channel_Default										= "RAID";
 local Thaliz_Target_Whisper_Default										= "0";
 local Thaliz_Target_Colours_Default										= "0";
-local Thaliz_Resurrection_Whisper_Message_Default			= "Resurrection incoming in 10 seconds!";
+local Thaliz_Resurrection_Whisper_Message_Default	= "Resurrection incoming in 10 seconds!"
 
 local Thaliz_ConfigurationLevel												= Thaliz_Configuration_Default_Level;
 
@@ -185,7 +188,7 @@ SlashCmdList["THALIZ_THALIZ"] = function(msg)
 	elseif option == "VERSION" then
 		SlashCmdList["THALIZ_VERSION"]();
 	else
-		Thaliz_Echo(string.format("Unknown command: %s", option));
+		Thaliz_Echo(string.format(L["Unknown command: %s"], option));
 	end
 end
 
@@ -211,7 +214,7 @@ SlashCmdList["THALIZ_VERSION"] = function(msg)
 	if Thaliz_IsInRaid() or Thaliz_IsInParty() then
 		Thaliz_SendAddonMessage("TX_VERSION##");
 	else
-		Thaliz_Echo(string.format("%s is using Thaliz version %s", UnitName("player"), GetAddOnMetadata("Thaliz", "Version")));
+		Thaliz_Echo(string.format(L["%s is using Thaliz version %s"], UnitName("player"), GetAddOnMetadata("Thaliz", "Version")));
 	end
 end
 
@@ -235,7 +238,7 @@ end
 SLASH_THALIZ_DISABLE1 = "/thalizdisable"
 SlashCmdList["THALIZ_DISABLE"] = function(msg)
 	Thaliz_Enabled = false;
-	Thaliz_Echo("Resurrection announcements has been disabled.");
+	Thaliz_Echo(L["Resurrection announcements has been disabled."]);
 end
 
 --[[
@@ -246,7 +249,7 @@ end
 SLASH_THALIZ_ENABLE1 = "/thalizenable"
 SlashCmdList["THALIZ_ENABLE"] = function(msg)
 	Thaliz_Enabled = true;
-	Thaliz_Echo("Resurrection announcements has been enabled.");
+	Thaliz_Echo(L["Resurrection announcements has been enabled."]);
 end
 
 --[[
@@ -257,16 +260,16 @@ end
 ]]
 SLASH_THALIZ_HELP1 = "/thalizhelp"
 SlashCmdList["THALIZ_HELP"] = function(msg)
-	Thaliz_Echo(string.format("Thaliz version %s options:", GetAddOnMetadata("Thaliz", "Version")));
-	Thaliz_Echo("Syntax:");
-	Thaliz_Echo("    /thaliz [option]");
-	Thaliz_Echo("Where options can be:");
-	Thaliz_Echo("    Res          (default) Resurrect next target.");
-	Thaliz_Echo("    Config       Open the configuration dialogue,");
-	Thaliz_Echo("    Disable      Disable Thaliz resurrection messages.");
-	Thaliz_Echo("    Enable       Enable Thaliz resurrection messages again.");
-	Thaliz_Echo("    Help         This help.");
-	Thaliz_Echo("    Version      Request version info from all clients.");
+	Thaliz_Echo(string.format(L["Thaliz version %s options:"], GetAddOnMetadata("Thaliz", "Version")));
+	Thaliz_Echo(L["Syntax:"]);
+	Thaliz_Echo(L["    /thaliz [option]"]);
+	Thaliz_Echo(L["Where options can be:"]);
+	Thaliz_Echo(L["    Res          (default) Resurrect next target."]);
+	Thaliz_Echo(L["    Config       Open the configuration dialogue,"]);
+	Thaliz_Echo(L["    Disable      Disable Thaliz resurrection messages."]);
+	Thaliz_Echo(L["    Enable       Enable Thaliz resurrection messages again."]);
+	Thaliz_Echo(L["    Help         This help."]);
+	Thaliz_Echo(L["    Version      Request version info from all clients."]);
 end
 
 
@@ -282,7 +285,7 @@ function TitanPanelThalizButton_OnLoad()
         id = THALIZ_NAME,
         menuText = THALIZ_TITAN_TITLE,
         buttonTextFunction = nil,
-        tooltipTitle = THALIZ_NAME .. " Options",
+        tooltipTitle = THALIZ_NAME .. L[" Options"],
         tooltipTextFunction = "TitanPanelThalizButton_GetTooltipText",
         frequency = 0,
 	    icon = "Interface\\Icons\\Spell_Holy_Resurrection"
@@ -290,7 +293,7 @@ function TitanPanelThalizButton_OnLoad()
 end
 
 function TitanPanelThalizButton_GetTooltipText()
-    return "Click to toggle option panel";
+    return L["Click to toggle option panel"];
 end
 
 
@@ -339,43 +342,43 @@ function Thaliz_RefreshVisibleMessageList(offset)
 		elseif grp == EMOTE_GROUP_CLASS then
 			-- Class names are listed alphabetically:
 			prio = 50		
-			if prm == "Druid" then
+			if prm == BC["Druid"] then
 				prio = 59
-			elseif prm == "Hunter" then
+			elseif prm == BC["Hunter"] then
 				prio = 58
-			elseif prm == "Mage" then
+			elseif prm == BC["Mage"] then
 				prio = 57
-			elseif prm == "Paladin" then
+			elseif prm == BC["Paladin"] then
 				prio = 56
-			elseif prm == "Priest" then
+			elseif prm == BC["Priest"] then
 				prio = 55
-			elseif prm == "Rogue" then
+			elseif prm == BC["Rogue"] then
 				prio = 54
-			elseif prm == "Shaman" then
+			elseif prm == BC["Shaman"] then
 				prio = 53
-			elseif prm == "Warlock" then
+			elseif prm == BC["Warlock"] then
 				prio = 52
-			elseif prm == "Warrior" then
+			elseif prm == BC["Warrior"] then
 				prio = 51
 			end;			
 		elseif grp == EMOTE_GROUP_RACE then
 			prio = 40
 			-- Racess are listed by faction, race name:
-			if prm == "Dwarf" then
+			if prm == BR["Dwarf"] then
 				prio = 49
-			elseif prm == "Gnome" then
+			elseif prm == BR["Gnome"] then
 				prio = 48
-			elseif prm == "Human" then
+			elseif prm == BR["Human"] then
 				prio = 47
-			elseif prm == "Night Elf" then
+			elseif prm == BR["Night Elf"] then
 				prio = 46
-			elseif prm == "Orc" then
+			elseif prm == BR["Orc"] then
 				prio = 45
-			elseif prm == "Tauren" then
+			elseif prm == BR["Tauren"] then
 				prio = 44
-			elseif prm == "Troll" then
+			elseif prm == BR["Troll"] then
 				prio = 43
-			elseif prm == "Undead" then
+			elseif prm == BR["Undead"] then
 				prio = 42
 			end;			
 		elseif grp == EMOTE_GROUP_DEFAULT then
@@ -542,7 +545,7 @@ function Thaliz_SaveMessageButton_OnClick()
 		-- Allow both "nightelf" and "night elf".
 		-- This weird construction ensures all are shown with capital first letter.
 		if string.upper(prm) == "NIGHTELF" or string.upper(prm) == "NIGHT ELF" then
-			prm = "Night Elf"
+			prm = BR["Night Elf"]
 		else
 			prm = Thaliz_UCFirst(prm)
 		end;
@@ -852,7 +855,7 @@ function Thaliz_AnnounceResurrection(playername, unitid)
 		UCGuildname = string.upper(guildname);
 	else
 		-- Note: guildname is unfortunately not detected for released corpses.
-		guildname = "(No Guild)";
+		guildname = L["(No Guild)"];
 		UCGuildname = "";
 	end;	
 
@@ -952,7 +955,7 @@ function Thaliz_AnnounceResurrection(playername, unitid)
 	
 	-- Fallback message if none are configured
 	if validCount == 0 then
-		validMessages[1] = "Resurrecting %s";
+		validMessages[1] = L["Resurrecting %s"];
 		validCount = 1;
 	end
 
@@ -1137,7 +1140,7 @@ function Thaliz_StartResurrectionOnPriorityTarget()
 	local warlocksAlive = false;
 	for n=1, groupsize, 1 do
 		unitid = grouptype..n
-		if not UnitIsDead(unitid) and UnitIsConnected(unitid) and UnitIsVisible(unitid) and UnitClass(unitid) == "Warlock" then
+		if not UnitIsDead(unitid) and UnitIsConnected(unitid) and UnitIsVisible(unitid) and UnitClass(unitid) == BC["Warlock"] then
 			warlocksAlive = true;
 			break;
 		end
@@ -1173,7 +1176,7 @@ function Thaliz_StartResurrectionOnPriorityTarget()
 			if IsRaidLeader(playername) and targetprio < PriorityToGroupLeader then
 				targetprio = PriorityToGroupLeader;
 			end
-			if not warlocksAlive and classinfo[1] == "Warlock" then
+			if not warlocksAlive and classinfo[1] == BC["Warlock"] then
 				targetprio = PriorityToFirstWarlock;				
 			end
 			
@@ -1187,9 +1190,9 @@ function Thaliz_StartResurrectionOnPriorityTarget()
 
 	if (table.getn(corpseTable) == 0) then
 		if (table.getn(blacklistedTable) == 0) then
-			Thaliz_Echo("There is no one to resurrect.");
+			Thaliz_Echo(L["There is no one to resurrect."]);
 		else
-			Thaliz_Echo("All targets have received a res.");
+			Thaliz_Echo(L["All targets have received a res."]);
 		end
 		return;
 	end
@@ -1374,8 +1377,8 @@ function Thalix_CheckIsNewVersion(versionstring)
 		if incomingVersion > THALIZ_CURRENT_VERSION then
 			if not THALIZ_UPDATE_MESSAGE_SHOWN then
 				THALIZ_UPDATE_MESSAGE_SHOWN = true;
-				Thaliz_Echo(string.format("NOTE: A newer version of ".. COLOUR_INTRO .."THALIZ"..COLOUR_CHAT.."! is available (version %s)!", versionstring));
-				Thaliz_Echo("NOTE: Go to https://armory.digam.dk/thaliz to download latest version.");
+				Thaliz_Echo(string.format(L["NOTE: A newer version of "].. COLOUR_INTRO .."THALIZ"..COLOUR_CHAT..L["! is available (version %s)!"], versionstring));
+				Thaliz_Echo(L["NOTE: Go to https://armory.digam.dk/thaliz to download latest version."]);
 			end
 		end	
 	end
@@ -1457,7 +1460,7 @@ end
 	A version response (RX) was received. The version information is displayed locally.
 ]]
 function Thaliz_HandleRXVersion(message, sender)
-	Thaliz_Echo(string.format("%s is using Thaliz version %s", sender, message))
+	Thaliz_Echo(string.format(L["%s is using Thaliz version %s"], sender, message))
 end
 
 function Thaliz_HandleTXVerCheck(message, sender)
@@ -1519,13 +1522,13 @@ function Thaliz_HandleCTRAMessage(msg, sender)
 						-- If unit is blacklisted we should NOT display the ress. message.
 						-- Unfortunately we cannot cancel the spell cast.
 						if Thaliz_IsPlayerBlacklisted(ctra_player) then
-							Thaliz_Echo(string.format("NOTE: Someone already ressed %s!", ctra_player));
+							Thaliz_Echo(string.format(L["NOTE: Someone already ressed %s!"], ctra_player));
 							return;
 						else
 							Thaliz_AnnounceResurrection(ctra_player);
 						end
 					else
-						Thaliz_Echo(string.format("NOTE: %s is offline!", ctra_player));
+						Thaliz_Echo(string.format(L["NOTE: %s is offline!"], ctra_player));
 					end
 				end				
 			end

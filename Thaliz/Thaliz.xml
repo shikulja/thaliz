@@ -1,5 +1,7 @@
-﻿<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/"> 
 	<Script file="Thaliz.lua" />
+	<Script file="localization.en.lua"/> 
+	<Script file="localization.ru.lua"/> 
 
 	<!-- template for Message list entries -->
 	<Button name="Thaliz_CellTemplate" hidden="true" virtual="true">
@@ -126,7 +128,7 @@
 				</Anchors>
 				<Scripts>
 					<OnLoad>
-						getglobal(this:GetName().."Text"):SetText("Raid Chat")
+						getglobal(this:GetName().."Text"):SetText(T_RAID_CHAT)
 					</OnLoad>
 					<OnClick>
 						Thaliz_HandleCheckbox(this);
@@ -141,7 +143,7 @@
 				</Anchors>
 				<Scripts>
 					<OnLoad>
-						getglobal(this:GetName().."Text"):SetText("Say")
+						getglobal(this:GetName().."Text"):SetText(T_SAY)
 					</OnLoad>
 					<OnClick>
 						Thaliz_HandleCheckbox(this);
@@ -156,7 +158,7 @@
 				</Anchors>
 				<Scripts>
 					<OnLoad>
-						getglobal(this:GetName().."Text"):SetText("Yell")
+						getglobal(this:GetName().."Text"):SetText(T_YELL)
 					</OnLoad>
 					<OnClick>
 						Thaliz_HandleCheckbox(this);
@@ -171,7 +173,7 @@
 				</Anchors>
 				<Scripts>
 					<OnLoad>
-						getglobal(this:GetName().."Text"):SetText("Include Defaults in Filtered macros")
+						getglobal(this:GetName().."Text"):SetText(T_INCLUDE_DEFAULTS)
 					</OnLoad>
 					<OnClick>
 						Thaliz_HandleCheckbox(this);
@@ -186,7 +188,7 @@
 				</Anchors>
 				<Scripts>
 					<OnLoad>
-						getglobal(this:GetName().."Text"):SetText("Store macro's per Character")
+						getglobal(this:GetName().."Text"):SetText(T_STORE_MACRO)
 					</OnLoad>
 					<OnClick>
 						Thaliz_HandleCheckbox(this);
@@ -201,7 +203,7 @@
 				</Anchors>
 				<Scripts>
 					<OnLoad>
-						getglobal(this:GetName().."Text"):SetText("Whisper the Target with ...")
+						getglobal(this:GetName().."Text"):SetText(T_WHISPER_TARGET)
 					</OnLoad>
 					<OnClick>
 						Thaliz_HandleCheckbox(this);
@@ -216,7 +218,7 @@
 				</Anchors>
 				<Scripts>
 					<OnLoad>
-						getglobal(this:GetName().."Text"):SetText("Enable coloured player names")
+						getglobal(this:GetName().."Text"):SetText(T_COLOURED_NAMES)
 					</OnLoad>
 					<OnClick>
 						Thaliz_HandleCheckbox(this);
@@ -268,7 +270,7 @@
 				</Scripts>
 			</EditBox>
 			<!-- OK button -->
-			<Button name="CloseButton" inherits="UIPanelButtonTemplate" movable="true" text="OK">
+			<Button name="CloseButton" inherits="UIPanelButtonTemplate" movable="true" text="T_OK">
 				<Size>
 					<AbsDimension x="100" y="23" />
 				</Size>
@@ -282,7 +284,7 @@
 				</Scripts>
 			</Button>
 			<!-- Close button -->
-			<Button name="CloseButton" inherits="UIPanelButtonTemplate" movable="true" text="Close">
+			<Button name="CloseButton" inherits="UIPanelButtonTemplate" movable="true" text="T_CLOSE">
 				<Size>
 					<AbsDimension x="100" y="23" />
 				</Size>
@@ -310,7 +312,7 @@
 						</Anchor>
 					</Anchors>
 				</Texture>
-				<FontString inherits="GameFontNormal" text="Thaliz Options">
+				<FontString inherits="GameFontNormal" text="T_OPTIONS">
 					<Anchors>
 						<Anchor point="TOP" relativeTo="$parentHeaderTexture">
 							<Offset>
@@ -444,7 +446,7 @@
 				</Scripts>
 			</EditBox>
 			<!-- OK button -->
-			<Button name="OkButton" inherits="UIPanelButtonTemplate" text="OK">
+			<Button name="OkButton" inherits="UIPanelButtonTemplate" text="T_OK">
 				<Size>
 					<AbsDimension x="100" y="23" />
 				</Size>
@@ -458,7 +460,7 @@
 				</Scripts>
 			</Button>
 			<!-- Cancel button -->
-			<Button name="CancelButton" inherits="UIPanelButtonTemplate" text="Cancel">
+			<Button name="CancelButton" inherits="UIPanelButtonTemplate" text="T_CANCEL">
 				<Size>
 					<AbsDimension x="100" y="23" />
 				</Size>
@@ -472,7 +474,7 @@
 				</Scripts>
 			</Button>
 			<!-- Reset button -->
-			<Button name="ResetButton" inherits="UIPanelButtonTemplate" text="Reset">
+			<Button name="ResetButton" inherits="UIPanelButtonTemplate" text="T_RESET">
 				<Size>
 					<AbsDimension x="100" y="23" />
 				</Size>
@@ -502,7 +504,7 @@
 				</Anchors>
 				<Scripts>
 					<OnLoad>
-						getglobal(this:GetName().."Text"):SetText("Default: Use this macro for anyone not matching a rule below")
+						getglobal(this:GetName().."Text"):SetText(T_NOT_MATCHING_RULE)
 					</OnLoad>
 					<OnClick>
 						Thaliz_HandleCheckbox(this);
@@ -517,7 +519,7 @@
 				</Anchors>
 				<Scripts>
 					<OnLoad>
-						getglobal(this:GetName().."Text"):SetText("Guild: Use macro where guild name = &lt;?&gt;")
+						getglobal(this:GetName().."Text"):SetText(T_MACRO_GUILD_NAME .. "= &lt;?&gt;")
 					</OnLoad>
 					<OnClick>
 						Thaliz_HandleCheckbox(this);
@@ -532,7 +534,7 @@
 				</Anchors>
 				<Scripts>
 					<OnLoad>
-						getglobal(this:GetName().."Text"):SetText("Character: Use macro where character name = &lt;?&gt;")
+						getglobal(this:GetName().."Text"):SetText(T_MACRO_CHARACTER_NAME .. "= &lt;?&gt;")
 					</OnLoad>
 					<OnClick>
 						Thaliz_HandleCheckbox(this);
@@ -547,7 +549,7 @@
 				</Anchors>
 				<Scripts>
 					<OnLoad>
-						getglobal(this:GetName().."Text"):SetText("Class: Use macro for class = &lt;?&gt;")
+						getglobal(this:GetName().."Text"):SetText(T_MACRO_CLASS .. "= &lt;?&gt;")
 					</OnLoad>
 					<OnClick>
 						Thaliz_HandleCheckbox(this);
@@ -562,7 +564,7 @@
 				</Anchors>
 				<Scripts>
 					<OnLoad>
-						getglobal(this:GetName().."Text"):SetText("Race: Use macro for race = &lt;?&gt;")
+						getglobal(this:GetName().."Text"):SetText(T_MACRO_RACE .. "= &lt;?&gt;")
 					</OnLoad>
 					<OnClick>
 						Thaliz_HandleCheckbox(this);
