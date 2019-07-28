@@ -22,49 +22,47 @@ https://github.com/Sentilix/thaliz
 	
 Если нет поднятых чернокнижников, один чернокнижник будет поднят, после остальных умеющих воскрешать. Лидер рейда получит приоритет немного ниже умеющих воскрешать, так как он так же - Мастер добычи.
 
-When a corpse is being resurrected (unreleased or not), a random message is
-displayed on the screen. This can be configured to be either a /SAY, /YELL
-or in /RAID chat, together with an optional whisper to the target.
+Когда труп воскресает, случайное сообщение будет
+отображатся в чате. Это можно настроить как /SAY, /YELL
+или в /RAID чат, вместе с дополнительным шепотом
 
-Up to 200 random messages in total can be configured. The addon ships with
-20 pre-configured messages; mostly with quotes from famous World of Warcraft
-bosses.
+Всего можно настроить до 200 случайных сообщений. Аддон поставляется с
+20 предварительно настроенными сообщениями; в основном с цитатами из известных боссов World of Warcraft
 
-Messages - or macros - can be grouped into one of five different groups:
-GUILD, CHARACTER, CLASS, RACE and DEFAULT.
+Сообщения - или макросы - могут быть сгруппированы в одну из пяти разных групп:
+ГИЛЬДИЯ, ПЕРСОНАЖ, КЛАСС, РАССА и СТАНДАРТ.
 
-When a macro is in the GUILD group, the macro can only be used if the target
-belongs to the guild name, configured together with that macro.
+Когда макрос находится в группе ГИЛЬДИЯ, макрос можно использовать только в том случае, если цель
+принадлежит этой гильдии, настроенная на этот макрос.
 
-Same goes for the CHARACTER group, where the macro can only be used if the
-configured name matches the target character's name. CLASS and RACE works in
-a similar way.
+То же самое касается группы ПЕРСОНАЖ, где макрос можно использовать только в том случае, если
+настроенное имя соответствует имени целевого персонажа. КЛАС и РАССА работает в
+аналогичным образом.
 
-If the target being resurrected does not match any of the four above groups,
-the macro's in the DEFAULT group will be used instead.
+Если цель воскрешения не соответствует ни одной из четырех вышеуказанных групп,
+вместо этого будет использоваться макрос в группе СТАНДАРТ.
 
-All pre-configured macros are in the DEFAULT group, but you can click on a
-macro and reconfigure it as you like.
+Все предварительно настроенные макросы находятся в группе СТАНДАРТ, но вы можете нажать на
+макрос и перенастроить его, как вам нравится.
 
-If the "Include Defaults in filtered macros" option is checked, then the
-default macro list will always be considered, also even the target may match
-macros in one or more of the other groups.
-
+Если стоит галочка «Включить стандартные в фильтрах макросов», то
+список макросов по умолчанию всегда будет учитываться, даже если цель может совпадать
+макросами в одной или нескольких других группах.
 
 
-About Thaliz:
+
+Про Талис:
 -------------
-Thaliz was a raiding priest in <Goldshire Golfclub> on the VanillaGaming.org
-World of Warcraft server, famous for dying alot. To be honest, we all died
-while progressing but he just stood out :-)
+Тализ был священником рейда в <Goldshire Golfclub> на VanillaGaming.org.
+Сервер World of Warcraft, известный тем, что много умирал. Если честно, мы все умерали
+пока развивались но он просто выделился :-)
 
-To recover faster from wipes, I wrote this simple addon to attempt to block
-"duplicate" resurrections, and respond with random macros while ressing - and
-that addon was named after the death-seeking priest: Thaliz!
+Чтобы быстрее восстановиться от вайпов, я написал этот простой аддон, чтобы попытаться заблокировать
+«повторные» воскрешения и отвечать случайными макросами при пока воскрешаем - и
+этот аддон был назван в честь ищущего смерти священника: Талис!
 
-Dying had never been funnier since that!
+С тех пор смерть всегда была забавней!
 
+Талис (священник) в конце концов умер в середине 2016 года, когда он удалил свой аккаунт.
 
-Thaliz (the priest) ultimately died mid 2016 when he deleted his account.
-
-RIP Thaliz.
+Покойся с миром Талис.
