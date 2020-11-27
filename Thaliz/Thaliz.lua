@@ -11,10 +11,10 @@ https://github.com/Sentilix/thaliz
 Please see the ReadMe.txt for addon details.
 ]]
 
-local L                 = AceLibrary("AceLocale-2.2"):new("Thaliz")
-local BS                = AceLibrary("Babble-Spell-2.2")
-local BR                = AceLibrary("Babble-Race-2.2")
-local BC                = AceLibrary("Babble-Class-2.2")
+local L					= AceLibrary("AceLocale-2.2"):new("Thaliz")
+local BS				= AceLibrary("Babble-Spell-2.2")
+local BR				= AceLibrary("Babble-Race-2.2")
+local BC				= AceLibrary("Babble-Class-2.2")
 local PARTY_CHANNEL								= "PARTY"
 local RAID_CHANNEL								= "RAID"
 local YELL_CHANNEL								= "YELL"
@@ -25,22 +25,22 @@ local CHAT_END										= "|r"
 local COLOUR_BEGINMARK						= "|c80"
 local COLOUR_CHAT									= COLOUR_BEGINMARK.."40A0F8"
 local COLOUR_INTRO								= COLOUR_BEGINMARK.."B040F0"
-local THALIZ_NAME									= "Thaliz"
-local THALIZ_TITAN_TITLE					= "Thaliz - Ress dem deads!"
+local THALIZ_NAME									= L["Thaliz"]
+local THALIZ_TITAN_TITLE					= L["Thaliz - Ress dem deads!"]
 local THALIZ_PREFIX								= "Thalizv1"
 local CTRA_PREFIX									= "CTRA"
 local THALIZ_MAX_MESSAGES					= 200
 local THALIZ_MAX_VISIBLE_MESSAGES = 20
-local THALIZ_EMPTY_MESSAGE			= "(Empty)"
+local THALIZ_EMPTY_MESSAGE = L["(Empty)"]
 
 local THALIZ_CURRENT_VERSION			= 0
 local THALIZ_UPDATE_MESSAGE_SHOWN = false
 
-local EMOTE_GROUP_DEFAULT					= "Default";
-local EMOTE_GROUP_GUILD						= "Guild";
-local EMOTE_GROUP_CHARACTER				= "Name";
-local EMOTE_GROUP_CLASS						= "Class";
-local EMOTE_GROUP_RACE						= "Race";
+local EMOTE_GROUP_DEFAULT					= L["Default"];
+local EMOTE_GROUP_GUILD						= L["Guild"];
+local EMOTE_GROUP_CHARACTER				= L["Name"];
+local EMOTE_GROUP_CLASS						= L["Class"];
+local EMOTE_GROUP_RACE						= L["Race"];
 
 --	List of valid class names with priority and resurrection spell name (if any)
 local classInfo = {
@@ -73,7 +73,7 @@ local Thaliz_Configuration_Default_Level							= "Character";	-- Can be "Charact
 local Thaliz_Target_Channel_Default										= "RAID";
 local Thaliz_Target_Whisper_Default										= "0";
 local Thaliz_Target_Colours_Default										= "0";
-local Thaliz_Resurrection_Whisper_Message_Default	= "Resurrection incoming in 10 seconds!"
+local Thaliz_Resurrection_Whisper_Message_Default	= L["Resurrection incoming in 10 seconds!"]
 
 local Thaliz_ConfigurationLevel												= Thaliz_Configuration_Default_Level;
 
@@ -94,32 +94,32 @@ Thaliz_Options = {}
 --	{ "Message", "Group", "Group parameter value" }
 local Thaliz_DefaultResurrectionMessages = {
 	-- UBRS
-	{ "(Ressing) THIS CANNOT BE!!! %s, deal with these insects.",			EMOTE_GROUP_DEFAULT, "" },	-- Rend Blackhand (UBRS)
+	{ L["(Ressing) THIS CANNOT BE!!! %s, deal with these insects."],			EMOTE_GROUP_DEFAULT, "" },	-- Rend Blackhand (UBRS)
 	-- ZG
-	{ "(Ressing) I\'m keeping my eye on you, %s!",										EMOTE_GROUP_DEFAULT, "" },	-- Bloodlord Mandokir (Raptor boss)
-	{ "(Ressing) %s, fill me with your RAGE!",												EMOTE_GROUP_DEFAULT, "" },	-- High Priest Thekal (Tiger boss)
-	{ "(Ressing) Fleeing will do you no good, %s!",										EMOTE_GROUP_DEFAULT, "" },	-- Hakkar
+	{ L["(Ressing) I\'m keeping my eye on you, %s!"],										EMOTE_GROUP_DEFAULT, "" },	-- Bloodlord Mandokir (Raptor boss)
+	{ L["(Ressing) %s, fill me with your RAGE!"],												EMOTE_GROUP_DEFAULT, "" },	-- High Priest Thekal (Tiger boss)
+	{ L["(Ressing) Fleeing will do you no good, %s!"],										EMOTE_GROUP_DEFAULT, "" },	-- Hakkar
 	-- AQ20
-	{ "(Ressing) Master %c %s, continue the fight!",													EMOTE_GROUP_DEFAULT, "" },	-- General Rajaxx
-	-- MC	
-	{ "(Ressing) Perhaps you'll need another lesson in pain, %s!",		EMOTE_GROUP_DEFAULT, "" },	-- Majordomo Executus
-	{ "(Ressing) Too soon, %s - you have died too soon!",							EMOTE_GROUP_DEFAULT, "" },	-- Ragnaros
-	{ "(Ressing) You have failed me, %s! Justice is met, indeed!",		EMOTE_GROUP_DEFAULT, "" }, 	-- Ragnaros
+	{ L["(Ressing) Master %c %s, continue the fight!"],													EMOTE_GROUP_DEFAULT, "" },	-- General Rajaxx
+	-- MC
+	{ L["(Ressing) Perhaps you'll need another lesson in pain, %s!"],		EMOTE_GROUP_DEFAULT, "" },	-- Majordomo Executus
+	{ L["(Ressing) Too soon, %s - you have died too soon!"],							EMOTE_GROUP_DEFAULT, "" },	-- Ragnaros
+	{ L["(Ressing) You have failed me, %s! Justice is met, indeed!"],		EMOTE_GROUP_DEFAULT, "" }, 	-- Ragnaros
 	-- BWL
-	{ "(Ressing) Forgive me %s, your death only adds to my failure.",	EMOTE_GROUP_DEFAULT, "" },	-- Vaelastrasz
+	{ L["(Ressing) Forgive me %s, your death only adds to my failure."],	EMOTE_GROUP_DEFAULT, "" },	-- Vaelastrasz
 	-- AQ40
-	{ "(Ressing) Let your death serve as an example, %s!",						EMOTE_GROUP_DEFAULT, "" },	-- Prophet Skeram
-	{ "(Ressing) Only flesh and bone. %cs are such easy prey, %s!",		EMOTE_GROUP_DEFAULT, "" },	-- Emperor Vek'lor (Twins)	
-	{ "(Ressing) Your friends will abandon you, %s!",									EMOTE_GROUP_DEFAULT, "" },	-- C'Thun
+	{ L["(Ressing) Let your death serve as an example, %s!"],						EMOTE_GROUP_DEFAULT, "" },	-- Prophet Skeram
+	{ L["(Ressing) Only flesh and bone. %cs are such easy prey, %s!"],		EMOTE_GROUP_DEFAULT, "" },	-- Emperor Vek'lor (Twins)
+	{ L["(Ressing) Your friends will abandon you, %s!"],									EMOTE_GROUP_DEFAULT, "" },	-- C'Thun
 	-- Naxx
-	{ "(Ressing) Shhh, %s... it will all be over soon.",							EMOTE_GROUP_DEFAULT, "" },	-- Anub'Rekhan
-	{ "(Ressing) Slay %s in the masters name!",												EMOTE_GROUP_DEFAULT, "" },	-- Grand Widow Faerlina
-	{ "(Ressing) Rise, %s! Rise and fight once more!",								EMOTE_GROUP_DEFAULT, "" },	-- Noth the Plaguebringer
-	{ "(Ressing) You should have stayed home, %s!",										EMOTE_GROUP_DEFAULT, "" },	-- Instructor Razuvious
-	{ "(Ressing) Death is the only escape, %s.",											EMOTE_GROUP_DEFAULT, "" },	-- Gothik the Harvester
-	{ "(Ressing) The first res goes to %s! Anyone care to wager?",		EMOTE_GROUP_DEFAULT, "" },	-- Lady Blaumeux (4HM)
-	{ "(Ressing) No more play, %s?",																	EMOTE_GROUP_DEFAULT, "" },	-- Patchwerk
-	{ "(Ressing) %s, you are too late... I... must... OBEY!",					EMOTE_GROUP_DEFAULT, "" } 	-- Thaddius
+	{ L["(Ressing) Shhh, %s... it will all be over soon."],							EMOTE_GROUP_DEFAULT, "" },	-- Anub'Rekhan
+	{ L["(Ressing) Slay %s in the masters name!"],												EMOTE_GROUP_DEFAULT, "" },	-- Grand Widow Faerlina
+	{ L["(Ressing) Rise, %s! Rise and fight once more!"],								EMOTE_GROUP_DEFAULT, "" },	-- Noth the Plaguebringer
+	{ L["(Ressing) You should have stayed home, %s!"],										EMOTE_GROUP_DEFAULT, "" },	-- Instructor Razuvious
+	{ L["(Ressing) Death is the only escape, %s."],											EMOTE_GROUP_DEFAULT, "" },	-- Gothik the Harvester
+	{ L["(Ressing) The first res goes to %s! Anyone care to wager?"],		EMOTE_GROUP_DEFAULT, "" },	-- Lady Blaumeux (4HM)
+	{ L["(Ressing) No more play, %s?"],																	EMOTE_GROUP_DEFAULT, "" },	-- Patchwerk
+	{ L["(Ressing) %s, you are too late... I... must... OBEY!"],					EMOTE_GROUP_DEFAULT, "" } 	-- Thaddius
 }
 
 

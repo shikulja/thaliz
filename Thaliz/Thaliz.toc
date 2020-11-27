@@ -1,4 +1,5 @@
 ## Title: Thaliz - Ress dem deads
+## Title-ruRU: Тализ - Воскрешение мертвых
 ## Notes: Smart addon to handle ressing party / raid members
 ## Notes-ruRU: Умный аддон для воскрешения участников группы / рейда
 ## Version: 1.5.0
@@ -7,4 +8,10 @@
 ## SavedVariables: Thaliz_Options
 ## X-OrgSavedVariables: Thaliz_ResurrectionMessages, Thaliz_Target_Channel, Thaliz_Target_Whisper
 ## X-Unused: roadmap.txt
+
+libs\AceLibrary\AceLibrary.lua
+libs\AceLocale-2.2\AceLocale-2.2.lua
+libs\Babble-Class-2.2\Babble-Class-2.2.lua
+libs\Babble-Race-2.2\Babble-Race-2.2.lua
+libs\Babble-Spell-2.2\Babble-Spell-2.2.lua
 Thaliz.xml

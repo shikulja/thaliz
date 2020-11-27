@@ -1,7 +1,8 @@
-<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/"> 
-	<Script file="Thaliz.lua" />
-	<Script file="localization.en.lua"/> 
-	<Script file="localization.ru.lua"/> 
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+	<Script file="localization.en.lua"/>
+	<Script file="localization.ru.lua"/>
+	<Script file="Thaliz.lua"/>
+
 
 	<!-- template for Message list entries -->
 	<Button name="Thaliz_CellTemplate" hidden="true" virtual="true">
