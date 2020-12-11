@@ -25,8 +25,8 @@ L:RegisterTranslations("enUS", function() return {
 
 	-- LUA COMMON --
 		-- Local strings
-	["Thaliz"]= true,
-	["Thaliz - Ress dem deads!"]= true,
+	["Thaliz"] = true,
+	["Thaliz - Ress dem deads!"] = true,
 	["(Empty)"] = true,
 	["Default"] = true,
 	["Guild"] = true,

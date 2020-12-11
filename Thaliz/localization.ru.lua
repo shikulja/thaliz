@@ -26,8 +26,8 @@ L:RegisterTranslations("ruRU", function() return {
 
 	-- LUA COMMON --
 		-- Local strings
-	["Thaliz"]= "Тализ",
-	["Thaliz - Ress dem deads!"]= "Тализ - Воскрешение мертвых!", -- "Восстание мертвецов!"
+	["Thaliz"] = "Тализ",
+	["Thaliz - Ress dem deads!"] = "Тализ - Воскрешение мертвых!", -- "Восстание мертвецов!"
 	["(Empty)"] = "(Пусто)",
 	["Default"] = "Стандартное",
 	["Guild"] = "Гильдия",
@@ -80,7 +80,7 @@ L:RegisterTranslations("ruRU", function() return {
 	["(Ressing) Forgive me %s, your death only adds to my failure."] = "(Воскрешение) Прости меня %s! Твоя смерть лишь усугубляет мое поражение!", -- Vaelastrasz
 		-- AQ40
 	["(Ressing) Let your death serve as an example, %s!"] = "(Воскрешение) Пусть твоя смерть послужит уроком другим, %s!", -- Prophet Skeram
-	["(Ressing) Only flesh and bone. %cs are such easy prey, %s!"] = "(Воскрешение) Всего лишь плоть и кости. %cs – такая легкая добыча, %s!", -- Emperor Vek'lor (Twins)
+	["(Ressing) Only flesh and bone. %cs are such easy prey, %s!"] = "(Воскрешение) Всего лишь плоть и кости. %c – такая легкая добыча, %s!", -- Emperor Vek'lor (Twins)
 	["(Ressing) Your friends will abandon you, %s!"] = nil, -- C'Thun
 		-- Naxx
 	["(Ressing) Shhh, %s... it will all be over soon."] = "(Воскрешение) Ш-ш-ш %s... скоро все будет кончено.", -- Anub'Rekhan
